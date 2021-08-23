@@ -2,19 +2,46 @@ name: CI
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Name of environment to deploy'
+        required: true
+        default: 'Staging'
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
+env:
+  ENVIRONMENT: Develop
+
 jobs:
-  build:
+  env:
     runs-on: ubuntu-latest
+    outputs:
+      ENVIRONMENT: ${{ steps.staging.outputs.ENVIRONMENT || steps.production.outputs.ENVIRONMENT || steps.e3.testing.ENVIRONMENT || env.ENVIRONMENT  }}
+    steps:
+      - if: github.event.inputs.environment == 'Staging'
+        id: staging
+        run: echo "::set-output name=ENVIRONMENT::Staging"
+      - if: github.event.inputs.environment == 'Production'
+        id: production
+        run: echo "::set-output name=ENVIRONMENT::Production"
+      - if: github.event.inputs.environment == 'Testing'
+        id: testing
+        run: echo "::set-output name=ENVIRONMENT::Testing"
+  build:
+    needs:
+      - env
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ needs.env.outputs.ENVIRONMENT }}
+    env:
+      ENV_NAME: ${{ needs.env.outputs.ENVIRONMENT }}
+      ENV_ONLY_SECRET: ${{ secrets.ENV_ONLY_SECRET }}
     steps:
       - uses: actions/checkout@v2
       - name: Run a one-line script
-        run: echo Hello, world!
-      - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo Hello, world! from $ENV_NAME
+          echo secret $ENV_ONLY_SECRET
