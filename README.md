@@ -1,5 +1,7 @@
 # example-github-flow-deployment
 
+FAKE COMMIT
+
 Most of the software companies are using `git` as version control system. There are several ways of working with `git`.
 Initial purpose of having version control system for the codebase was having an identical and manageable code sharing
 between team members.
