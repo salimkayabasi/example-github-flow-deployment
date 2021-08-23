@@ -3,9 +3,6 @@ name: CI
 on:
   workflow_dispatch:
     inputs:
-      sha:
-        description: 'Git sha'
-        required: true
       environment:
         description: 'Name of environment to deploy'
         required: true
@@ -46,9 +43,6 @@ jobs:
       ENV_ONLY_SECRET: ${{ secrets.ENV_ONLY_SECRET }}
       REPO_ONLY_SECRET: ${{ secrets.REPO_ONLY_SECRET }}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.inputs.sha }}
       - name: Run your special commands here
         run: |
           echo Hello, world! from $ENVIRONMENT
