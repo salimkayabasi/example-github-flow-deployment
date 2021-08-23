@@ -45,6 +45,17 @@ This flow creates ENVs automagically for us! Same goes for other ENVs once we cr
 
 ![env list](./assets/env-list.png)
 
+## Advanced Features
+
+So far, it was only for enabling us to have Cont. Development flow with multiple ENVs. What if we would like to have
+more control on what is being deployed and even setting more protections on flow.
+
+### ENV specific secrets
+
+GitHub Secrets can be defined as level of `Organization`, `Repository` or even `Environment`.
+
+![repo secret](./assets/secrets-repo.png)
+
 ## Some good articles
 
 * https://nvie.com/posts/a-successful-git-branching-model/

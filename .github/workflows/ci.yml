@@ -19,7 +19,7 @@ jobs:
   env:
     runs-on: ubuntu-latest
     outputs:
-      ENVIRONMENT: ${{ steps.staging.outputs.ENVIRONMENT || steps.production.outputs.ENVIRONMENT || steps.e3.testing.ENVIRONMENT || env.ENVIRONMENT  }}
+      ENVIRONMENT: ${{ steps.staging.outputs.ENVIRONMENT || steps.production.outputs.ENVIRONMENT || steps.testing.outputs.ENVIRONMENT || env.ENVIRONMENT  }}
     steps:
       - if: github.event.inputs.environment == 'Staging'
         id: staging
@@ -39,9 +39,11 @@ jobs:
     env:
       ENVIRONMENT: ${{ needs.env.outputs.ENVIRONMENT }}
       ENV_ONLY_SECRET: ${{ secrets.ENV_ONLY_SECRET }}
+      REPO_ONLY_SECRET: ${{ secrets.REPO_ONLY_SECRET }}
     steps:
       - uses: actions/checkout@v2
       - name: Run a one-line script
         run: |
           echo Hello, world! from $ENVIRONMENT
-          echo secret $ENV_ONLY_SECRET
+          echo ENV_ONLY_SECRET $ENV_ONLY_SECRET
+          echo REPO_ONLY_SECRET $REPO_ONLY_SECRET
