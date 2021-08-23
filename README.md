@@ -8,6 +8,12 @@ supporting multiple environments.
 
 With this repo, I'll setup a basic demo for GitHub Flow + GitHub Actions
 
+## Steps
+
+Start with protecting your `main` branch.
+<img width="944" alt="Screenshot 2021-08-23 at 10 17 58" src="https://user-images.githubusercontent.com/1138037/130414429-e314ef96-2121-4fbb-9f4d-4b8e91634e57.png">
+
+
 ## Some good articles
 * https://nvie.com/posts/a-successful-git-branching-model/
 * https://medium.com/@patrickporto/4-branching-workflows-for-git-30d0aaee7bf
