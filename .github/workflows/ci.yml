@@ -37,11 +37,11 @@ jobs:
     environment:
       name: ${{ needs.env.outputs.ENVIRONMENT }}
     env:
-      ENV_NAME: ${{ needs.env.outputs.ENVIRONMENT }}
+      ENVIRONMENT: ${{ needs.env.outputs.ENVIRONMENT }}
       ENV_ONLY_SECRET: ${{ secrets.ENV_ONLY_SECRET }}
     steps:
       - uses: actions/checkout@v2
       - name: Run a one-line script
         run: |
-          echo Hello, world! from $ENV_NAME
+          echo Hello, world! from $ENVIRONMENT
           echo secret $ENV_ONLY_SECRET
